@@ -30,7 +30,7 @@ const signup = async (req, res) => {
         );
 
         res.cookie('signupToken', token, { httpOnly: true, secure: true });
-        await sendOTPEmail(email, otp);
+        await sendOTPEmail(email,otp);
        
         res.status(200).json({ message: 'Signup successful, please verify your OTP', success: true, token });
     } catch (error) {
