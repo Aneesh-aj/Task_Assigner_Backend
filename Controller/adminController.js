@@ -13,7 +13,6 @@ const adminLogin = async (req, res) => {
         if (!email || !password) {
             return res.status(400).json({ error: 'Email and password are required' });
         }
-          await Admin.create({email,password})
         const admin = await Admin.findOne({ email });
 
         if (!admin) {
