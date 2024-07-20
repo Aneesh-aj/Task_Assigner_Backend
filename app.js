@@ -13,13 +13,11 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-mongoose.connect(process.env.mongodb, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  }).then(() => {
-    console.log('Connected to MongoDB');
-  }).catch(err => {
-    console.error('Failed to connect to MongoDB', err);
+mongoose.connect(process.env.mongodb)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => {
+    console.error('Failed to connect to MongoDB:', err.message);
+    process.exit(1); // Exit the process if connection fails
   });
 
 app.use(cookieParser())
@@ -30,8 +28,8 @@ const userRoute = require("./Routes/userRoutes")
 const adminRoute = require("./Routes/adminRoutes")
 
 
-app.use("/user",userRoute)
 app.use("/admin",adminRoute)
+app.use("/user",userRoute)
 
 
 app.listen(3000,()=>{
